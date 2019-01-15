@@ -3,11 +3,8 @@ package universconception.conception.cegepstefoy.restaurantconcept.Model;
 public class Personne {
 
     private String prenom;
-
     private String nom;
-
     private Courriel courriel;
-
     private Password password;
 
     protected Personne(String prenom, String nom, Courriel courriel, Password password) {

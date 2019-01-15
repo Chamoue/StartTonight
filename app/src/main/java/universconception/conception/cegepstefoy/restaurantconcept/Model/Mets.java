@@ -8,13 +8,9 @@ import android.arch.persistence.room.PrimaryKey;
 public class Mets {
 
     private int metsId;
-
     private String nomMet;
     private int profile_pic_id;
-
     private int Quantity;
-
-
     private Float price;
 
 

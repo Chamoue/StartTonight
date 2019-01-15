@@ -12,7 +12,7 @@ import universconception.conception.cegepstefoy.restaurantconcept.Model.Courriel
 import universconception.conception.cegepstefoy.restaurantconcept.Model.Menu;
 import universconception.conception.cegepstefoy.restaurantconcept.Model.Mets;
 import universconception.conception.cegepstefoy.restaurantconcept.Model.Password;
-import universconception.conception.cegepstefoy.restaurantconcept.R;
+
 
 public class DataBase {
 
@@ -24,7 +24,6 @@ public class DataBase {
     private boolean loggedIn;
     private boolean adminMode;
     private List<Commande> currentOrders;
-    private boolean basicMenuLoaded;
 
     private DataBase() {
         //Singleton
@@ -32,14 +31,6 @@ public class DataBase {
         this.menu = new Menu();
         this.commande = new Commande();
         this.currentOrders= new ArrayList<>();
-    }
-
-    public void setMenuLoaded() {
-        this.basicMenuLoaded=true;
-    }
-
-    public boolean isBasicMenuLoaded() {
-        return basicMenuLoaded;
     }
 
     public void addToMenu(Mets mets) {
@@ -68,6 +59,15 @@ public class DataBase {
         this.currentOrders.remove(orderToRemove);
     }
 
+    public void addToCurrentOrders(Commande commande) {
+        this.currentOrders.add(commande);
+    }
+
+    public void clearCurrentUserOrders() {
+        this.commande = new Commande();
+        this.commande.setUser(this.currentUser);
+    }
+
 
     public boolean isAdminModeEnabled() {
         return adminMode;
@@ -76,6 +76,7 @@ public class DataBase {
     public void generateBasicAppPrototypeNeeds() {
         generateUsers();
         generateOrders();
+        this.commande.setUser(this.currentUser);
     }
 
     public List<Mets> getMealFromCurrentOrderOf (String courriel) {
@@ -100,6 +101,10 @@ public class DataBase {
     private void generateUsers() {
         this.addUser(new Courriel("gerant"), new Password("gerant"), "gerant", "gerant");
         this.addUser(new Courriel("mik"), new Password("mik"), "mik", "mik");
+    }
+
+    public CompteUsager getCurrentUser() {
+        return currentUser;
     }
 
     public void setCurrentUser(CompteUsager compteUsager) {

@@ -12,34 +12,35 @@ import java.util.List;
 
 import universconception.conception.cegepstefoy.restaurantconcept.R;
 
-public class CustomOrderForMealList extends BaseAdapter {
+public class CustomAdapterFacture extends BaseAdapter {
 
-    private List<Mets> orderedMeals;
+    private List<Mets> order;
     private Context context;
 
-    public CustomOrderForMealList(Context pContext, List<Mets> mets) {
-        context = pContext;
-        orderedMeals = mets;
+    public CustomAdapterFacture(List<Mets> order, Context context) {
+        this.order = order;
+        this.context = context;
     }
 
     @Override
     public int getCount() {
-        return this.orderedMeals.size();
+        return this.order.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return this.orderedMeals.get(position);
+        return this.order.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return this.orderedMeals.indexOf(getItem(position));
+        return order.indexOf(getItem(position));
     }
 
-    private class ViewHolder {
-        TextView itemOrdered;
+    private class ViewHolder{
+        TextView item;
         TextView quantity;
+        TextView prix;
     }
 
     @Override
@@ -48,22 +49,24 @@ public class CustomOrderForMealList extends BaseAdapter {
 
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.liste_commande, null);
+        if(convertView == null){
+            convertView = mInflater.inflate(R.layout.facture, null);
             holder = new ViewHolder();
 
-            holder.itemOrdered = convertView.findViewById(R.id.itemOrdered);
-            holder.quantity = convertView.findViewById(R.id.quantityOrdered);
+            holder.item = convertView.findViewById(R.id.itemNameTag);
+            holder.quantity = convertView.findViewById(R.id.QuantityTag);
+            holder.prix = convertView.findViewById(R.id.priceTag);
 
-            Mets item = orderedMeals.get(position);
+            Mets item = order.get(position);
 
-            holder.itemOrdered.setText(item.getNomMet());
+            holder.item.setText(item.getNomMet());
             holder.quantity.setText(Integer.toString(item.getQuantity()));
+            holder.prix.setText(Float.toString(item.getPrice()));
 
 
             convertView.setTag(holder);
 
-        } else {
+        }else{
             holder = (ViewHolder) convertView.getTag();
         }
 

@@ -56,4 +56,8 @@
     </string-array>
     <string name="title_activity_passer_commande">PasserCommandeActivity</string>
     <string name="passer_la_commande">Passer la commande</string>
+    <string name="prix">Prix</string>
+    <string name="quantite">Quantite</string>
+    <string name="item">Item</string>
+    <string name="votre_commande">Votre Commande</string>
 </resources>

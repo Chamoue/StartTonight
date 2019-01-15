@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.MenuPopupWindow;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,6 +21,7 @@ public class CommanderMetsActivity extends AppCompatActivity {
     private int imageNumber;
     private ImageView mView;
     private Button addToOrderButton;
+    private Spinner spinner;
 
 
     @Override
@@ -27,6 +29,7 @@ public class CommanderMetsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commander_mets);
         this.addToOrderButton = findViewById(R.id.ajouter);
+        this.spinner = findViewById(R.id.drop_down_option);
 
         if (DataBase.getInstance().isAdminModeEnabled()) {
             this.addToOrderButton.setText("Retirer cet item du menu");
@@ -62,7 +65,8 @@ public class CommanderMetsActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else {
-            DataBase.getInstance().addToOrder(new Mets(1, member_name,1,1f,1));
+            float price = Float.parseFloat(getIntent().getStringExtra("prix"));
+            DataBase.getInstance().addToOrder(new Mets(1, member_name, Integer.parseInt(this.spinner.getSelectedItem().toString()),price,1));
             startActivity(intent);
         }
     }

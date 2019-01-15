@@ -2,6 +2,8 @@ package universconception.conception.cegepstefoy.restaurantconcept.Model;
 
 public class Courriel {
 
+    private String courriel;
+
     public Courriel() {
     }
 
@@ -17,5 +19,5 @@ public class Courriel {
         this.courriel = courriel;
     }
 
-    private String courriel;
+
 }

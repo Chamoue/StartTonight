@@ -68,7 +68,7 @@ public class MenuActivity extends AppCompatActivity {
         mylistview = findViewById(R.id.list);
         CustomerAdapter adapter = new CustomerAdapter(this, mMets);
         mylistview.setAdapter(adapter);
-        DataBase.getInstance().setMenuLoaded();
+
 
         mylistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,6 +77,7 @@ public class MenuActivity extends AppCompatActivity {
                 int imageNumber = mMets.get(position).getProfile_pic_id();
                 Intent intent = new Intent(MenuActivity.this, CommanderMetsActivity.class);
                 intent.putExtra("member_name", member_name);
+                intent.putExtra("prix",Float.toString(mMets.get(position).getPrice()));
                 intent.putExtra("imageNumber", imageNumber);
 
                 startActivity(intent);
@@ -97,5 +98,10 @@ public class MenuActivity extends AppCompatActivity {
 
 
     public void onAddToMenuButton(View view) {
+    }
+
+    public void onReadyToOrderButtonClicked(View view) {
+        Intent intent = new Intent(this, PasserUneCommande.class);
+        startActivity(intent);
     }
 }

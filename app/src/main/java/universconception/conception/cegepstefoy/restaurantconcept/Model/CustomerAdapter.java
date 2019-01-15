@@ -39,7 +39,7 @@ public class CustomerAdapter extends BaseAdapter {
         return rowItems.indexOf(getItem(position));
     }
 
-    private class ViewHolder{
+    private class ViewHolder {
         ImageView profile_pic;
         TextView member_name;
         TextView quantity;
@@ -53,7 +53,7 @@ public class CustomerAdapter extends BaseAdapter {
 
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        if(convertView == null){
+        if (convertView == null) {
             convertView = mInflater.inflate(R.layout.liste_item, null);
             holder = new ViewHolder();
 
@@ -72,7 +72,7 @@ public class CustomerAdapter extends BaseAdapter {
 
             convertView.setTag(holder);
 
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 

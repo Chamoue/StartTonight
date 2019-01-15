@@ -1,4 +1,5 @@
 package universconception.conception.cegepstefoy.restaurantconcept.Model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Menu {
         this.menu.add(mets);
     }
 
-    public void removeFromMenu(Mets mets){
+    public void removeFromMenu(Mets mets) {
         this.menu.remove(mets);
     }
 }
