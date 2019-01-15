@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">RestaurantConcept</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+
+    <string-array name="mets_names">
+        <item>Poulet</item>
+        <item>Beuf</item>
+        <item>Boisson</item>
+        <item>Salade</item>
+        <item>Dessert</item>
+    </string-array>
+
+
+    <!-- Pictures -->
+    <array name="profile_pics">
+        <item>@drawable/poulet</item>
+        <item>@drawable/beuf</item>
+        <item>@drawable/boisson</item>
+        <item>@drawable/salade</item>
+        <item>@drawable/dessert</item>
+    </array>
+
+    <!-- contact type -->
+    <string-array name="contactType">
+        <item>Mobile</item>
+        <item>Work</item>
+        <item>Home</item>
+        <item>Work</item>
+        <item>Mobile</item>
+    </string-array>
+
+    <string-array name="province_array">
+        <item>Alberta</item>
+        <item>Colombie-Britannique</item>
+        <item>Île-du-Prince-Edouard</item>
+        <item>Manitoba</item>
+        <item>Nouveau-Brunswick</item>
+        <item>Nouvelle-Écosse</item>
+        <item>Ontario</item>
+        <item>Quebec</item>
+        <item>Saskatchewan</item>
+        <item> Terre-Neuve-et-Labrador</item>
+        <item>Territoires du Nord-Ouest</item>
+        <item>Nunavut</item>
+        <item>Yukon</item>
+    </string-array>
+
+
+
+    <string-array name="les_option_quantite">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string name="title_activity_passer_commande">PasserCommandeActivity</string>
+</resources>
