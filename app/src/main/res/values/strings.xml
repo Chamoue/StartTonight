@@ -47,7 +47,6 @@
     </string-array>
 
 
-
     <string-array name="les_option_quantite">
         <item>1</item>
         <item>2</item>
@@ -56,4 +55,5 @@
         <item>5</item>
     </string-array>
     <string name="title_activity_passer_commande">PasserCommandeActivity</string>
+    <string name="passer_la_commande">Passer la commande</string>
 </resources>

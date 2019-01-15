@@ -7,9 +7,24 @@ import java.util.List;
 public class Commande {
 
     private List<Mets> metsCommande;
+    private Client client;
 
     public Commande() {
         this.metsCommande = new ArrayList<>();
+        this.client=null;
+    }
+
+    public Commande(Client client, List<Mets> order) {
+        this.metsCommande = order;
+        this.client=client;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public void addToOrder(Mets mets) {

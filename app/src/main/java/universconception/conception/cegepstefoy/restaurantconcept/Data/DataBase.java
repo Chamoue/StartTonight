@@ -1,14 +1,18 @@
 package universconception.conception.cegepstefoy.restaurantconcept.Data;
 
+import android.content.res.TypedArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import universconception.conception.cegepstefoy.restaurantconcept.Model.Client;
 import universconception.conception.cegepstefoy.restaurantconcept.Model.Commande;
 import universconception.conception.cegepstefoy.restaurantconcept.Model.CompteUsager;
 import universconception.conception.cegepstefoy.restaurantconcept.Model.Courriel;
 import universconception.conception.cegepstefoy.restaurantconcept.Model.Menu;
 import universconception.conception.cegepstefoy.restaurantconcept.Model.Mets;
 import universconception.conception.cegepstefoy.restaurantconcept.Model.Password;
+import universconception.conception.cegepstefoy.restaurantconcept.R;
 
 public class DataBase {
 
@@ -20,6 +24,7 @@ public class DataBase {
     private boolean loggedIn;
     private boolean adminMode;
     private List<Commande> currentOrders;
+    private boolean basicMenuLoaded;
 
     private DataBase() {
         //Singleton
@@ -29,24 +34,72 @@ public class DataBase {
         this.currentOrders= new ArrayList<>();
     }
 
-    public void addToAcceptedOrdersList(Commande commande) {
-        this.currentOrders.add(commande);
+    public void setMenuLoaded() {
+        this.basicMenuLoaded=true;
     }
 
-    public void removeFromAcceptedOrdersList(Commande commande) {
-        this.currentOrders.remove(commande);
+    public boolean isBasicMenuLoaded() {
+        return basicMenuLoaded;
     }
 
-    public void clearAcceptedOrderList() {
-        this.currentOrders = new ArrayList<>();
+    public void addToMenu(Mets mets) {
+        this.menu.addToMenu(mets);
     }
+
+    public void removeFromMenu(String nomDuMet) {
+        for (Mets met : this.menu.getMenu()) {
+            if (met.getNomMet().equals(nomDuMet)) {
+                this.menu.removeFromMenu(met);
+            }
+        }
+    }
+
+    public Commande getCommande() {
+        return commande;
+    }
+
+    public void removeFromAcceptedOrdersList(String courriel) {
+        Commande orderToRemove = new Commande();
+        for (Commande commande : this.currentOrders) {
+            if (commande.getClient().getCourriel().getCourriel().equals(courriel)){
+                orderToRemove=commande;
+            }
+        }
+        this.currentOrders.remove(orderToRemove);
+    }
+
 
     public boolean isAdminModeEnabled() {
         return adminMode;
     }
 
-    public void addAdminAccount() {
+    public void generateBasicAppPrototypeNeeds() {
+        generateUsers();
+        generateOrders();
+    }
+
+    public List<Mets> getMealFromCurrentOrderOf (String courriel) {
+        for (Commande commande : this.currentOrders ) {
+            if (commande.getClient().getCourriel().getCourriel().equals(courriel)){
+                return commande.getMetsCommande();
+            }
+        }
+        return  null;
+    }
+
+    private void generateOrders() {
+        List<Mets> order = new ArrayList<>();
+        order.add(new Mets(1,"Patate", 2,2f,1));
+        order.add(new Mets(1,"Pepsi", 2,2f,1));
+        order.add(new Mets(1,"Chips", 2,2f,1));
+        this.currentOrders.add(new Commande(new Client("Bob","Marcel Leboeuf",new Courriel("unePremiere@commande.ca"),new Password("Check"),"123, Fausse Rue"),order));
+        this.currentOrders.add(new Commande(new Client("Serghei","Serghei",new Courriel("uneDeuxieme@commande.ca"),new Password("Check"), "666 De L'enfer"),order));
+        this.currentOrders.add(new Commande(new Client("Mikael","Mikael",new Courriel("uneTroisieme@commande.ca"),new Password("Check"),"5123 Blvd Random"),order));
+    }
+
+    private void generateUsers() {
         this.addUser(new Courriel("gerant"), new Password("gerant"), "gerant", "gerant");
+        this.addUser(new Courriel("mik"), new Password("mik"), "mik", "mik");
     }
 
     public void setCurrentUser(CompteUsager compteUsager) {
@@ -95,7 +148,7 @@ public class DataBase {
     public static DataBase getInstance() {
         if (instance == null) {
             DataBase dataBase = new DataBase();
-            dataBase.addAdminAccount();
+            dataBase.generateBasicAppPrototypeNeeds();
             return dataBase;
         }
         else {

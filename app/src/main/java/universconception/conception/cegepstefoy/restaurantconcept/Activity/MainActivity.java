@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             //OK
         }
         else {
-            DataBase.getInstance().addAdminAccount();
+            DataBase.getInstance().generateBasicAppPrototypeNeeds();
         }
     }
 

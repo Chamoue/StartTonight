@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,13 +22,12 @@ import universconception.conception.cegepstefoy.restaurantconcept.R;
 public class MenuActivity extends AppCompatActivity {
 
     List<Mets> mMets = new ArrayList<>();
-
     String[] mets_names;
     TypedArray profile_pics;
     String[] price;
-
     ListView mylistview;
     private FloatingActionButton addToMenuButton;
+    private Button orderButton;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -36,13 +36,14 @@ public class MenuActivity extends AppCompatActivity {
 
 
         this.addToMenuButton = findViewById(R.id.AddToMenuButton);
+        this.orderButton = findViewById(R.id.readyToOrderButton);
 
-        if (DataBase.getInstance().isAdminModeEnabled()) {
-            // OK
+        adminCheck();
+        if (DataBase.getInstance().isUserLoggedIn() && DataBase.getInstance().getCommande().getMetsCommande().size()>0 && !DataBase.getInstance().isAdminModeEnabled()) {
+            //FINE
         }
         else {
-            //Fonctionne malgre l'erreur
-            this.addToMenuButton.setVisibility(View.INVISIBLE);
+            this.orderButton.setVisibility(View.INVISIBLE);
         }
 
         mMets.add(new Mets(1, "Poulet", 1, 5.88f, 0));
@@ -57,16 +58,17 @@ public class MenuActivity extends AppCompatActivity {
         price = getResources().getStringArray(R.array.contactType);
 
 
+
         for (int i = 0; i < mets_names.length; i++) {
             Mets rest = null;
             rest = mMets.get(i);
             rest.setProfile_pic_id(profile_pics.getResourceId(i, -1));
         }
 
-
         mylistview = findViewById(R.id.list);
         CustomerAdapter adapter = new CustomerAdapter(this, mMets);
         mylistview.setAdapter(adapter);
+        DataBase.getInstance().setMenuLoaded();
 
         mylistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,9 +80,22 @@ public class MenuActivity extends AppCompatActivity {
                 intent.putExtra("imageNumber", imageNumber);
 
                 startActivity(intent);
-
             }
         });
 
+    }
+
+    private void adminCheck() {
+        if (DataBase.getInstance().isAdminModeEnabled()) {
+            // OK
+        }
+        else {
+            //Fonctionne malgre l'erreur -- NE PAS CORRIGER
+            this.addToMenuButton.setVisibility(View.INVISIBLE);
+        }
+    }
+
+
+    public void onAddToMenuButton(View view) {
     }
 }
